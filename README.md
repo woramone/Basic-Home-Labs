@@ -114,7 +114,31 @@ netstat -anob
 ```
 - We want to see if an established connection to Kali machine is there, scroll up and you can see it
 
+![4](https://github.com/user-attachments/assets/08958183-54d5-4b09-b8ae-57f1ec3d53ac)
 
 
 
+> [!IMPORTANT]
+> Since I use Windows11, I got block by Microsoft Defender Antivirus many times until I found out I have to not only turn off real-time protection but also "exclusions" Resume.pdf.exe file before I can execute it
 
+- Head back to Kali machine, we should have a connection on our Handler
+```console
+help
+```
+- Type help to see what kind of commands exist
+```console
+shell
+```
+- To establish a shell in our test machine
+```console
+net user
+```
+```console
+net localgroup
+```
+```console
+ipconfig
+```
+- That's enough commands. Let's head back to Windows machine and see what kind of telemetry we had generated
+- Make sure Splunk is configured to ingest sysmon logs
+- 
