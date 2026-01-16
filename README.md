@@ -23,7 +23,8 @@ The Basic Home Labs Project is an initiative focused on hands-on experimentation
 
 
 - Download VirtualBox and install Windows & Kali Linux
-- Install Splunk and Sysmon on Windows VM
+- Install Splunk and download "Splunk Add-on for Sysmon"
+- Install Sysmon on Windows VM
 - Configure VMs, use Internal Network and set static IP
 
 
@@ -140,5 +141,26 @@ net localgroup
 ipconfig
 ```
 - That's enough commands. Let's head back to Windows machine and see what kind of telemetry we had generated
-- Make sure Splunk is configured to ingest sysmon logs
-- 
+- Make sure Splunk is configured to ingest sysmon logs by going to "C:\Program Files\Splunk\etc\system\local" 
+- Add "inputs.conf" file by download <a href="https://tinyurl.com/MyDFIR-Splunk-Inputs">HERE</a> and put it in "Splunk\etc\system\local"
+- Restart Splunk services by search "services" > Splunkd Service > right click > restart
+- Open Splunk on the browser and select settings > Indexes > New Index > put "endpoint" > save ,for now data is being ingested into our environment
+> [!NOTE]
+> If it doesn't show data as we think, go back and redo in Kali (nmap, executed malware until run 3 commands in shell)
+
+- Go to "Search and Reporting", type in
+>  index="endpoint" Resume.pdf(1).exe
+
+>[!NOTE]
+>In my case is Resume.pdf(1).exe because I did download and use the second one instead of Resume.pdf.exe
+
+- Try to see the EventCode=1 from the result we can see the ParentImage has Resume.pdf(1).exe has spawned cmd.exe 
+- Use "process_guid" value to search
+> index="endpoint" {process_guid_value} | table _time,ParentImage,Image,CommandLine
+
+- We will see the result what we did in Kali machine
+  
+  ![5](https://github.com/user-attachments/assets/238d7d0a-7a22-40be-853e-d799e75c9b20)
+
+Credit : Thanks <a href="https://www.youtube.com/@MyDFIR">MyDFIR</a> <a href="https://www.youtube.com/watch?v=-8X7Ay4YCoA&list=PLG6KGSNK4PuBWmX9NykU0wnWamjxdKhDJ&index=4">Learning video</a>
+
